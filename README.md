@@ -30,7 +30,7 @@ Dataset structure example:
 
 # Algorthims tested
 
-* Arrays.sort
+* Arrays.sort (default java sort implementation, uses merge sort under the hood)
 * Radix sort
 * Merge sort
 * Merge sort with parallelization (2 variants)
