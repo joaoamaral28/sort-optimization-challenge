@@ -33,8 +33,10 @@ Example:
 * Merge sort
 * Merge sort with parallelization
 * Quick sort
-* Quick sort hybrid (with Insertion sort)
-* Quick sort with parallelization
+* Quick sort hybrid (using insertion sort)
+* Quick sort with parallelization (2 variants)
+  * Manual thread scheduling
+  * Automatic thread scheduling using ForkJoinPool 
 
 # Benchmarking results
 
@@ -50,3 +52,11 @@ Results of the average execution time of each algorithm after N=1000 trials
 | Quick sort hybrid| 334 ms |
 | Quick sort parallel | 272 ms |
 | Quick sort parallel2 | 159 ms|
+
+# Results analysis
+
+....
+
+# Build & Deploy 
+
+....
