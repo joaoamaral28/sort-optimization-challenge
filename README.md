@@ -11,7 +11,7 @@ the sorting will be performed on.
 
 # Dataset structure
 
-The dataset used for this test was the my_random_data.csv (15.7 MB) file, which contains 994920 records and the following columns:
+The dataset used for this test was the my_random_data.csv (15.78 MB) file, which contains 1000000 records and the following columns:
 * primary_key: a random unique real positive integer 
 * reference_value: a real positive integer
 
@@ -36,14 +36,17 @@ Example:
 * Quick sort hybrid (with Insertion sort)
 * Quick sort with parallelization
 
-# Results
+# Benchmarking results
 
-| Algorithm  | Avg. sorting time (s)|
+Results of the average execution time of each algorithm after N=1000 trials
+
+| Algorithm  | Avg. sorting time |
 | ------------- | ------------- |
-| Arrays.sort |
-| Radix sort  |  | 
-| Merge sort  |   |
-| Merge sort parallel  |   |
-|Quick Sort|  |
-| Quick sort hybrid|  |
-| Quick sort parallel |  |
+| Radix sort  | 1022 ms | 
+| Arrays.sort | 392 ms|
+| Merge sort  | 317 ms  |
+| Merge sort parallel  | 164 ms  |
+|Quick Sort| 345 ms |
+| Quick sort hybrid| 334 ms |
+| Quick sort parallel | 272 ms |
+| Quick sort parallel2 | 159 ms|
