@@ -91,8 +91,8 @@ Results of the average execution time of each algorithm after N=1000 trials
  </tr>
   <tr> 
   <td> Merge sort parallel fork </td> 
-  <td> XXX ms </td>
-  <td> XXX ms </td> 
+  <td> 156 ms </td>
+  <td> 139 ms </td> 
  </tr>
     <tr> 
   <td> Quick sort </td> 
@@ -118,11 +118,12 @@ Results of the average execution time of each algorithm after N=1000 trials
 
 # Results analysis
 
-
 From the get go it is possible to observe that the java internal Arrays sort() method loses in performance against the implemented recursive merge sort and quick sort.
-Additionally, and as expected since the keys are large integer values, radix sort is the worst performant algorithm. 
+Additionally, and as expected since the keys are large integer values, radix sort is the worst performant algorithm. The rationale was then to try and optimize the quick sort and merge sort algorithms. 
 
-The rationale was then to try and optimize both these algorithms. Since they are algorithms that follow the approach of "divide and conquer", we can parallelize the algorithm recursive calls in order to speed up this process. 
+Since they follow the approach of "divide and conquer", we can parallelize the algorithms recursive calls in order to speed up this process. As such, each algorithm contains two variants, one where the algorithms are implemented as a thread and the thread scheduling is done implicitly (MergeSortParallel, QuickSortParallel) and other where the algorithms are implemented as a [RecursiveAction](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/RecursiveAction.html) and executed inside a [ForkJoinPool](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ForkJoinPool.html), where the scheduling is handled automatically (MergeSortParallelFork, QuickSortParallelFork). 
+
+Another approach was to mix the quick sort algorithm with the insertion sort (QuickSortHybrid), a commonly used strategy to improve its performance. The way it works is that in the algorithm current recursive call if the data partition that is being processed is lower than a specified threshold (INSERTION_THRESHOLD=10), it is better to sort it using insertion sort as it performs fewer operations rather than to keep spliting them. The result is a slight performance boost compared to the regular recursive quick sort.
 
 # Build & Deploy 
 
