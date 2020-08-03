@@ -15,9 +15,10 @@ The algorithms were tested against two data sets (my_random_data.csv and my_rand
 * primary_key: a random unique real positive integer 
 * reference_value: a real positive integer
 
-In my_random_data.csv the keys are random integers within the interval [ 1, (10*K )[, while in my_random_data_incremental.csv sequential keys have incremental diferences of one unit, that is, keys are within the interval [ 1, K [. 
+In my_random_data.csv the keys are random integers within the interval [ 1, 10 * K ) [ , while in my_random_data_incremental.csv sequential keys have incremental diferences of one unit, that is, keys are within the interval [ 1, K [ . 
 
-The sorting algorithms are performed based on the primary_key value.
+The sorting algorithms are performed based on the primary_key value. In a real scenario the dataset would be compsed by the primary_key field and multiple other data fields.
+However, for simplicity purposes, we just use a integer placeholder field, the reference_value (which could also be of any other data type).  
 
 Dataset structure example: 
 
