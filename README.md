@@ -65,7 +65,7 @@ Results of the average execution time of each algorithm after N=1000 trials
 <table>
   <tr>
     <th rowspan="2">Algorithm</th>
-    <th colspan="2">Average time using dataset</th>
+    <th colspan="2">Average time per dataset</th>
   </tr>
  <tr> 
   <td> my_random_data </td> 
