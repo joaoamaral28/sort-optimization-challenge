@@ -110,6 +110,11 @@ Results of the average execution time of each algorithm after N=1000 trials
   <td> 176 ms </td> 
  </tr>
  <tr> 
+  <td> Quick sort hybrid parallel </td> 
+  <td> 212 ms </td>
+  <td> 154 ms </td> 
+ </tr>
+ <tr> 
   <td> Quick sort parallel fork </td> 
   <td> 159 ms </td>
   <td> 137 ms </td> 
