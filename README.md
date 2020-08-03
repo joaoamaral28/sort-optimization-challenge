@@ -11,13 +11,15 @@ the sorting will be performed on.
 
 # Dataset structure
 
-The dataset used for this test was the my_random_data.csv (15.78 MB) file, which contains 1000000 records and the following columns:
+The algorithms were tested against two data sets (my_random_data.csv and my_random_data_incremental.csv) both containing 1000000 records and the following columns: 
 * primary_key: a random unique real positive integer 
 * reference_value: a real positive integer
 
-The sorting algorithms are performed based on the primary_key value
+In my_random_data.csv the keys are random integers within the interval [1, 10000000], while in my_random_data_incremental.csv sequential keys have incremental diferences of one unit, that is, keys are within the interval [1, 1000000]. 
 
-Example: 
+The sorting algorithms are performed based on the primary_key value.
+
+Dataset structure example: 
 
 | Primary_key  | reference_value|
 | ------------- | ------------- |
@@ -31,7 +33,9 @@ Example:
 * Arrays.sort
 * Radix sort
 * Merge sort
-* Merge sort with parallelization
+* Merge sort with parallelization (2 variants)
+  * Manual thread scheduling
+  * Automatic thread scheduling using ForkJoinPool 
 * Quick sort
 * Quick sort hybrid (using insertion sort)
 * Quick sort with parallelization (2 variants)
@@ -42,16 +46,75 @@ Example:
 
 Results of the average execution time of each algorithm after N=1000 trials
 
-| Algorithm  | Avg. sorting time |
-| ------------- | ------------- |
-| Radix sort  | 1022 ms | 
-| Arrays.sort | 392 ms|
-| Merge sort  | 317 ms  |
-| Merge sort parallel  | 164 ms  |
-|Quick Sort| 345 ms |
-| Quick sort hybrid| 334 ms |
-| Quick sort parallel | 272 ms |
-| Quick sort parallel2 | 159 ms|
+<!--
+| Algorithm | Avg. sorting time | |
+| ------------- | ------------- | - |
+| Radix sort  | 1022 ms | |
+| Arrays.sort | 392 ms| | |
+| Merge sort  | 317 ms  | |
+| Merge sort parallel  | 164 ms  | |
+|Quick Sort| 345 ms | |
+| Quick sort hybrid| 334 ms | |
+| Quick sort parallel | 272 ms | | 
+| Quick sort parallel2 | 159 ms| |
+-->
+
+<table>
+  <tr>
+    <th rowspan="2">Algorithm</th>
+    <th colspan="2">Average time using dataset</th>
+  </tr>
+ <tr> 
+  <td> my_random_data </td> 
+  <td> my_random_data_incremental </td>
+ </tr>
+  <tr> 
+  <td> Radix sort </td> 
+  <td> 1022 ms </td>
+  <td> 648 ms </td> 
+ </tr>
+ </tr>
+  <tr> 
+  <td> Arrays.sort </td> 
+  <td> 392 ms </td>
+  <td> 348 ms </td> 
+ </tr>
+   <tr> 
+  <td> Merge sort </td> 
+  <td> 317 ms </td>
+  <td> 320 ms </td> 
+ </tr>
+   <tr> 
+  <td> Merge sort parallel </td> 
+  <td> 164 ms </td>
+  <td> 128 ms </td> 
+ </tr>
+  <tr> 
+  <td> Merge sort parallel fork </td> 
+  <td> 337 ms </td>
+  <td> 343 ms </td> 
+ </tr>
+    <tr> 
+  <td> Quick sort </td> 
+  <td> 345 ms </td>
+  <td> 328 ms </td> 
+ </tr>
+ <tr> 
+  <td> Quick sort hybrid </td> 
+  <td> 334 ms </td>
+  <td> 303 ms </td> 
+ </tr>
+     <tr> 
+  <td> Quick sort parallel </td> 
+  <td> 272 ms </td>
+  <td> 176 ms </td> 
+ </tr>
+ <tr> 
+  <td> Quick sort parallel fork </td> 
+  <td> 159 ms </td>
+  <td> 137 ms </td> 
+ </tr>
+</table>
 
 # Results analysis
 
