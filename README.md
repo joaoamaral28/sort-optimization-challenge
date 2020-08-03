@@ -38,9 +38,12 @@ Dataset structure example:
   * Automatic thread scheduling using ForkJoinPool (includes a minimum partition size tunable parameter that controls if a sub array is eligible for paralelization or not)
 * Quick sort
 * Quick sort hybrid (using insertion sort)
-* Quick sort with parallelization (2 variants)
+* Quick sort hybrid with parallelization (2 variants):
   * Manual thread scheduling
   * Automatic thread scheduling using ForkJoinPool (simillar to merge sort parallel variant)
+* Quick sort with parallelization (2 variants)
+  * Manual thread scheduling
+  * Automatic thread scheduling using ForkJoinPool
 
 # Benchmarking results
 
@@ -100,14 +103,19 @@ Results of the average execution time of each algorithm after N=1000 trials
   <td> 328 ms </td> 
  </tr>
  <tr> 
-  <td> Quick sort hybrid </td> 
-  <td> 334 ms </td>
-  <td> 303 ms </td> 
- </tr>
-     <tr> 
   <td> Quick sort parallel </td> 
   <td> 272 ms </td>
   <td> 176 ms </td> 
+ </tr>
+ <tr> 
+  <td> Quick sort parallel fork </td> 
+  <td> 159 ms </td>
+  <td> 137 ms </td> 
+ </tr>
+ <tr> 
+  <td> Quick sort hybrid </td> 
+  <td> 334 ms </td>
+  <td> 303 ms </td> 
  </tr>
  <tr> 
   <td> Quick sort hybrid parallel </td> 
@@ -115,10 +123,11 @@ Results of the average execution time of each algorithm after N=1000 trials
   <td> 154 ms </td> 
  </tr>
  <tr> 
-  <td> Quick sort parallel fork </td> 
-  <td> 159 ms </td>
-  <td> 137 ms </td> 
+  <td> Quick sort hybrid parallel fork </td> 
+  <td> 118 ms </td>
+  <td> 111 ms </td> 
  </tr>
+
 </table>
 
 # Results analysis
@@ -129,6 +138,12 @@ Additionally, and as expected since the keys are large integer values, radix sor
 Since they follow the approach of "divide and conquer", we can parallelize the algorithms recursive calls in order to speed up this process. As such, each algorithm contains two variants, one where the algorithms are implemented as a thread and the thread scheduling is done implicitly (MergeSortParallel, QuickSortParallel) and other where the algorithms are implemented as a [RecursiveAction](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/RecursiveAction.html) and executed inside a [ForkJoinPool](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ForkJoinPool.html), where the scheduling is handled automatically (MergeSortParallelFork, QuickSortParallelFork). 
 
 Another approach was to mix the quick sort algorithm with the insertion sort (QuickSortHybrid), a commonly used strategy to improve its performance. The way it works is that in the algorithm current recursive call if the data partition that is being processed is lower than a specified threshold (INSERTION_THRESHOLD=10), it is better to sort it using insertion sort as it performs fewer operations rather than to keep spliting them. The result is a slight performance boost compared to the regular recursive quick sort.
+
+On the same way as merge and quick sort, the quick sort hybrid algorithm was also parallelized using two different approaches. This resulted in the algorithm with the fastest sorting performance (QuickSortHybridParallelFork). 
+
+# Future work
+
+Adjust the algorithms tunable parameters of the parallel fork variant (minPartitionSize, INSERTION_THRESHOLD) in order to find the best values for this dataset. 
 
 # Build & Deploy 
 
