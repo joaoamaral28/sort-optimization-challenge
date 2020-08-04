@@ -32,19 +32,19 @@ Dataset structure example:
 # Algorithms tested
 
 * Arrays.sort (default java sort implementation, uses merge sort under the hood)
-* Radix sort
-* Merge sort
+* Radix sort (using counting sort)
+* Merge sort:
   * Merge sort recursive
-  * Merge sort with parallelization (2 variants)
+  * Merge sort with parallelization (2 variants):
      * Manual thread scheduling
      * Automatic thread scheduling using ForkJoinPool (includes a minimum partition size tunable parameter that controls if a sub array is eligible for paralelization or not)
-* Quick sort
+* Quick sort:
   * Quick sort recursive
-  * Quick sort with parallelization (2 variants)
+  * Quick sort with parallelization (2 variants):
     * Manual thread scheduling
     * Automatic thread scheduling using ForkJoinPool
   
-* Quick sort hybrid (using insertion sort)
+* Quick sort hybrid (using insertion sort):
   * Quick sort hybrid recursive
   * Quick sort hybrid with parallelization (2 variants):
      * Manual thread scheduling
