@@ -185,6 +185,6 @@ $ docker run sorting-challenge
 
 # Sources
 
-..
-..
-..
+* [Parallel Merge Sort in Java](https://medium.com/@teivah/parallel-merge-sort-in-java-e3213ae9fa2c)
+* [Performance analysis on multithreaded sorting algorithms](https://www.diva-portal.org/smash/get/diva2:839729/FULLTEXT02)
+* [Hybrid quicksort algorithm](https://www.techiedelight.com/hybrid-quicksort/)
