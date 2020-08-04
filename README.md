@@ -184,7 +184,7 @@ the [QuicksortHybridParallelFork](https://github.com/joaoamaral28/sort-optimizat
 
 ### Running the benchmark test
 
-The algorithms benchmark tests were implemented as JUnit tests which are present in the AlgorithmsPerformanceBenchmarkTest class. In the development stages the benchmark tests were run directly through the IDE (IntelliJ). All attempts of running the test directly in the terminal through maven were
+The algorithms benchmark tests were implemented as JUnit tests which are present in the [AlgorithmsPerformanceBenchmarkTest](https://github.com/joaoamaral28/sort-optimization-challenge/blob/master/SortingChallenge/src/test/java/SortAlgorithms/AlgorithmsPerformanceBenchmarkTest.java) class. In the development stages the benchmark tests were run directly through the IDE (IntelliJ). All attempts of running the test directly in the terminal through maven were
 unsuccessfull (most likely an issue with junit and maven-surefire-plugin):
 
 ```shell
