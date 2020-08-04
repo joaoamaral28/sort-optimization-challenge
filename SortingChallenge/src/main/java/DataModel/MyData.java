@@ -1,5 +1,11 @@
-package Model;
+package DataModel;
 
+/**
+ * Class to structure and handle the data being parsed and sorted by
+ * the different algorithms. The "key" field represents a real unique
+ * integer positive value used as the target of the sorting algorithms.
+ * The "referenceVal" represents a placeholder field with no real purpose
+ */
 public class MyData implements Comparable<MyData>{
 
     private int key;
