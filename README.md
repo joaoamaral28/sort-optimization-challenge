@@ -141,15 +141,11 @@ Results of the average execution time of each algorithm after N=1000 trials
 From the get go it is possible to observe that the java internal Arrays sort() method loses in performance against the implemented recursive merge sort and quick sort.
 Additionally, and as expected since the keys are large integer values, radix sort is the worst performant algorithm. The rationale was then to try and optimize the quick sort and merge sort algorithms. 
 
-Since they follow the approach of "divide and conquer", we can parallelize the algorithms recursive calls in order to speed up this process. As such, each algorithm contains two variants, one where the algorithms are implemented as a thread and the thread scheduling is done implicitly (MergeSortParallel, QuickSortParallel) and other where the algorithms are implemented as a [RecursiveAction](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/RecursiveAction.html) and executed inside a [ForkJoinPool](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ForkJoinPool.html), where the scheduling is handled automatically (MergeSortParallelFork, QuickSortParallelFork). 
+Since they follow the approach of "divide and conquer", we can parallelize the algorithms recursive calls in order to speed up this process. As such, each algorithm contains two variants, one where the algorithms are implemented as a thread and the thread scheduling is done implicitly ([MergeSortParallel](https://github.com/joaoamaral28/sort-optimization-challenge/blob/master/SortingChallenge/src/main/java/SortAlgorithms/MergeSort/MyDataMergeSortParallel.java), [QuickSortParallel](https://github.com/joaoamaral28/sort-optimization-challenge/blob/master/SortingChallenge/src/main/java/SortAlgorithms/QuickSort/MyDataQuickSortParallel.java)) and other where the algorithms are implemented as a [RecursiveAction](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/RecursiveAction.html) and executed inside a [ForkJoinPool](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ForkJoinPool.html), where the scheduling is handled automatically ([MergeSortParallelFork](https://github.com/joaoamaral28/sort-optimization-challenge/blob/master/SortingChallenge/src/main/java/SortAlgorithms/MergeSort/MyDataMergeSortParallelFork.java), [QuickSortParallelFork](https://github.com/joaoamaral28/sort-optimization-challenge/blob/master/SortingChallenge/src/main/java/SortAlgorithms/QuickSort/MyDataQuickSortParallelFork.java)). 
 
-Another approach was to mix the quick sort algorithm with the insertion sort (QuickSortHybrid), a commonly used strategy to improve its performance. The way it works is that in the algorithm current recursive call if the data partition that is being processed is lower than a specified threshold (INSERTION_THRESHOLD=10), it is better to sort it using insertion sort as it performs fewer operations rather than to keep spliting them. The result is a slight performance boost compared to the regular recursive quick sort.
+Another approach was to mix the quick sort algorithm with the insertion sort ([QuickSortHybrid](https://github.com/joaoamaral28/sort-optimization-challenge/blob/master/SortingChallenge/src/main/java/SortAlgorithms/QuickSortHybrid/MyDataQuickSortHybrid.java)), a commonly used strategy to improve its performance. The way it works is that in the algorithm current recursive call if the data partition that is being processed is lower than a specified threshold (INSERTION_THRESHOLD=10), it is better to sort it using insertion sort as it performs fewer operations rather than to keep spliting them. The result is a slight performance boost compared to the regular recursive quick sort.
 
-On the same way as merge and quick sort, the quick sort hybrid algorithm was also parallelized using two different approaches. This resulted in the algorithm with the fastest sorting performance (QuickSortHybridParallelFork). 
-
-# Future work
-
-Adjust the algorithms tunable parameters of the parallel fork variant (minPartitionSize, INSERTION_THRESHOLD) in order to find the best values for this dataset. 
+On the same way as merge and quick sort, the quick sort hybrid algorithm was also parallelized using two different approaches. This resulted in the algorithm with the fastest sorting performance ([QuickSortHybridParallelFork](https://github.com/joaoamaral28/sort-optimization-challenge/blob/master/SortingChallenge/src/main/java/SortAlgorithms/QuickSortHybrid/MyDataQuickSortHybridParallelFork.java)). 
 
 # Build & Deploy 
 
@@ -183,8 +179,33 @@ Run the image
 $ docker run sorting-challenge
 ```
 
+The application will then execute inside the docker container. It will parse the dataset and sort it using the fastest performant algorithm, in this case
+the [QuicksortHybridParallelFork](https://github.com/joaoamaral28/sort-optimization-challenge/blob/master/SortingChallenge/src/main/java/SortAlgorithms/QuickSortHybrid/MyDataQuickSortHybridParallelFork.java)
+
+### Running the benchmark test
+
+The algorithms benchmark tests were implemented as JUnit tests which are present in the AlgorithmsPerformanceBenchmarkTest class. In the development stages the benchmark tests were run directly through the IDE (IntelliJ). All attempts of running the test directly in the terminal through maven were
+unsuccessfull (most likely an issue with junit and maven-surefire-plugin):
+
+```shell
+$ mvn clean test -Dtest=SortingAlgorithms.AlgorithmsPerformanceBenchmarkTest
+```
+
+On the same note, the Dockerfile contains an environment variable (group) that can controll which tests, unit (default) or benchmark, are meant to be run when deploying the maven project inside the docker container. However, it also suffers from the same issue where maven cannot distinguish the two tests, which are properly tagged with their respective annotation ("unit" and "benchmark").
+
+```shell
+$ docker build -f Dockerfile --build-arg group=benchmark -t sorting-challenge ./
+```
+
+# Future work
+
+* Adjust the algorithms tunable parameters of the parallel fork variant (minPartitionSize, INSERTION_THRESHOLD) in order to find the best values for this dataset and further optimize the algorithms if possible.
+* Fix the maven build in order to allow modularity for running the benchmark tests.
+
+
 # Sources
 
 * [Parallel Merge Sort in Java](https://medium.com/@teivah/parallel-merge-sort-in-java-e3213ae9fa2c)
 * [Performance analysis on multithreaded sorting algorithms](https://www.diva-portal.org/smash/get/diva2:839729/FULLTEXT02)
 * [Hybrid quicksort algorithm](https://www.techiedelight.com/hybrid-quicksort/)
+* [Merge sort with ForkJoinPool](https://dehasi.github.io/java/2017/06/06/merge-sort-with-fork-join.html)
