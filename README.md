@@ -199,6 +199,7 @@ $ docker build -f Dockerfile --build-arg group=benchmark -t sorting-challenge ./
 
 # Future work
 
+* Adjust the main class and dockerfile in order to provide parameters for choosing which dataset to sort (it is my_random_data_incremental.csv by default and any change must be manually changed in the code)
 * Adjust the algorithms tunable parameters of the parallel fork variant (minPartitionSize, INSERTION_THRESHOLD) in order to find the best values for this dataset and further optimize the algorithms if possible.
 * Fix the maven build in order to allow modularity for running the benchmark tests.
 
