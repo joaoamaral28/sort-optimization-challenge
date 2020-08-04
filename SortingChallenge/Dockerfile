@@ -8,6 +8,8 @@ COPY src /usr/local/service/src
 
 WORKDIR /usr/local/service
 
-RUN mvn clean install -Dgroups=unit
+ENV group unit
+
+RUN mvn clean install -Dgroups={group}
 
 CMD ["java", "-jar", "target/sorting-challenge-jar-with-dependencies.jar"]
