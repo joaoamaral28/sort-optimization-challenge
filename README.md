@@ -153,7 +153,35 @@ Adjust the algorithms tunable parameters of the parallel fork variant (minPartit
 
 # Build & Deploy 
 
-....
+### Pre-requisites
+
+* [Docker](https://www.docker.com/get-started)
+
+### Local deployment
+
+Clone the repository to your local machine 
+
+```shell
+$ git clone https://github.com/joaoamaral28/sort-optimization-challenge.git
+```
+
+Open project directory
+
+```shell
+$ cd SortingChallenge
+```
+
+Build the docker image
+
+```shell
+$ docker build -f Dockerfile -t sorting-challenge ./
+```
+
+Run the image
+
+```shell
+$ docker run sorting-challenge
+```
 
 # Sources
 
