@@ -34,17 +34,22 @@ Dataset structure example:
 * Arrays.sort (default java sort implementation, uses merge sort under the hood)
 * Radix sort
 * Merge sort
-* Merge sort with parallelization (2 variants)
-  * Manual thread scheduling
-  * Automatic thread scheduling using ForkJoinPool (includes a minimum partition size tunable parameter that controls if a sub array is eligible for paralelization or not)
+  * Merge sort recursive
+  * Merge sort with parallelization (2 variants)
+     * Manual thread scheduling
+     * Automatic thread scheduling using ForkJoinPool (includes a minimum partition size tunable parameter that controls if a sub array is eligible for paralelization or not)
 * Quick sort
+  * Quick sort recursive
+  * Quick sort with parallelization (2 variants)
+    * Manual thread scheduling
+    * Automatic thread scheduling using ForkJoinPool
+  
 * Quick sort hybrid (using insertion sort)
-* Quick sort hybrid with parallelization (2 variants):
-  * Manual thread scheduling
-  * Automatic thread scheduling using ForkJoinPool (simillar to merge sort parallel variant)
-* Quick sort with parallelization (2 variants)
-  * Manual thread scheduling
-  * Automatic thread scheduling using ForkJoinPool
+  * Quick sort hybrid recursive
+  * Quick sort hybrid with parallelization (2 variants):
+     * Manual thread scheduling
+     * Automatic thread scheduling using ForkJoinPool (simillar to merge sort parallel variant)
+
 
 # Benchmarking results
 
@@ -149,3 +154,9 @@ Adjust the algorithms tunable parameters of the parallel fork variant (minPartit
 # Build & Deploy 
 
 ....
+
+# Sources
+
+..
+..
+..
